@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flow_stepper_widget/flow_stepper_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'mock_events.dart';
 
 void main() {
@@ -80,6 +81,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,6 +102,45 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Package info
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Flow Stepper Widget',
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'A lightweight, highly-customizable Flutter stepper/indicator widget with modern design and full styling control.',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        FilledButton.icon(
+                          onPressed: () => _launchUrl('https://pub.dev/packages/flow_stepper_widget'),
+                          icon: const Icon(Icons.public),
+                          label: const Text('pub.dev'),
+                        ),
+                        const SizedBox(width: 8),
+                        FilledButton.icon(
+                          onPressed: () => _launchUrl('https://github.com/danial2026/flow_stepper_widget'),
+                          icon: const Icon(Icons.code),
+                          label: const Text('GitHub'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
             // Controls
             Card(
               child: Padding(
