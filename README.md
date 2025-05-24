@@ -21,7 +21,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flow_stepper_widget: ^0.0.1
+  flow_stepper_widget: any
 ```
 
 ## Quick Start
