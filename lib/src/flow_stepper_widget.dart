@@ -200,7 +200,7 @@ class FlowStepperWidget extends StatelessWidget {
               onLongPress: () => onStepLongPress?.call(step.id),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                // crossAxisAlignment: labelOrderType == LabelOrderType.start ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: labelOrderType == LabelOrderType.start
                     ? [label, const SizedBox(height: 8), indicator]
                     : [indicator, const SizedBox(height: 8), label],
@@ -216,7 +216,7 @@ class FlowStepperWidget extends StatelessWidget {
               onLongPress: () => onStepLongPress?.call(step.id),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                // mainAxisAlignment: labelOrderType == LabelOrderType.start ? MainAxisAlignment.end : MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: labelOrderType == LabelOrderType.start
                     ? [label, const SizedBox(width: 8), indicator]
                     : [indicator, const SizedBox(width: 8), label],
@@ -240,16 +240,16 @@ class FlowStepperWidget extends StatelessWidget {
       padding: direction == Axis.vertical
           ? (labelType == LabelType.vertical
               ? (labelOrderType == LabelOrderType.end
-                  ? EdgeInsets.only(left: (stepIconSize + (stepPadding.horizontal)) / 2)
-                  : EdgeInsets.only(right: (stepIconSize + (stepPadding.horizontal)) / 2))
+                  ? EdgeInsets.only(left: getStepPaddingHorizontal)
+                  : EdgeInsets.only(right: getStepPaddingHorizontal))
               : (labelOrderType == LabelOrderType.start
-                  ? EdgeInsets.only(right: (stepIconSize + (stepPadding.horizontal)) / 2)
-                  : EdgeInsets.only(left: (stepIconSize + (stepPadding.horizontal)) / 2)))
+                  ? EdgeInsets.only(right: getStepPaddingHorizontal)
+                  : EdgeInsets.only(left: getStepPaddingHorizontal)))
           : (labelType == LabelType.vertical
               ? (labelOrderType == LabelOrderType.end
-                  ? EdgeInsets.only(top: (stepIconSize + (stepPadding.vertical)) / 2)
-                  : EdgeInsets.only(bottom: (stepIconSize + (stepPadding.vertical)) / 2))
-              : EdgeInsets.only(top: (stepIconSize + (stepPadding.vertical)) / 2)),
+                  ? EdgeInsets.only(top: getStepPaddingVertical)
+                  : EdgeInsets.only(bottom: getStepPaddingVertical))
+              : EdgeInsets.only(top: getStepPaddingVertical)),
       child: Container(
         width: direction == Axis.vertical ? lineThickness ?? 1.0 : spacing,
         height: direction == Axis.vertical ? spacing : lineThickness ?? 1.0,
@@ -268,4 +268,8 @@ class FlowStepperWidget extends StatelessWidget {
       ),
     );
   }
+
+  double get getStepPaddingVertical => (stepIconSize + (stepPadding.vertical)) / 2 - (lineThickness ?? 1.0);
+
+  double get getStepPaddingHorizontal => (stepIconSize + (stepPadding.horizontal)) / 2 - (lineThickness ?? 1.0);
 }
