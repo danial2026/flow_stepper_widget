@@ -23,8 +23,11 @@ class FlowStepperWidget extends StatelessWidget {
   /// Spacing between steps
   final double spacing;
 
-  /// Color of the connecting lines
-  final Color? lineColor;
+  /// Active color of the connecting lines
+  final Color? lineActiveColor;
+
+  /// Inactive color of the connecting lines
+  final Color? lineInactiveColor;
 
   /// Thickness of the connecting lines
   final double? lineThickness;
@@ -91,7 +94,8 @@ class FlowStepperWidget extends StatelessWidget {
     this.direction = Axis.vertical,
     this.labelOrderType = LabelOrderType.start,
     this.spacing = 24.0,
-    this.lineColor,
+    this.lineActiveColor,
+    this.lineInactiveColor,
     this.lineThickness = 1.0,
     this.dashPattern,
     this.showLines = true,
@@ -124,20 +128,22 @@ class FlowStepperWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 orderedSteps.length,
-                (index) => buildStep(context, orderedSteps[index], index, orderedSteps.length),
+                (index) => buildStep(context, orderedSteps[index], index, orderedSteps.length,
+                    (index < orderedSteps.length - 1 && orderedSteps[index + 1].active && orderedSteps[index].active)),
               ),
             )
           : Row(
               mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 orderedSteps.length,
-                (index) => buildStep(context, orderedSteps[index], index, orderedSteps.length),
+                (index) => buildStep(context, orderedSteps[index], index, orderedSteps.length,
+                    (index < orderedSteps.length - 1 && orderedSteps[index + 1].active && orderedSteps[index].active)),
               ),
             ),
     );
   }
 
-  Widget buildStep(BuildContext context, FlowStep step, int index, int orderedStepsLength) {
+  Widget buildStep(BuildContext context, FlowStep step, int index, int orderedStepsLength, bool isLineActiveColor) {
     final isLast = index == orderedStepsLength - 1;
 
     return direction == Axis.vertical
@@ -146,7 +152,7 @@ class FlowStepperWidget extends StatelessWidget {
             crossAxisAlignment: labelOrderType == LabelOrderType.start ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               _buildStepContent(context, step),
-              if (showLines && !isLast) _buildConnectingLine(),
+              if (showLines && !isLast) _buildConnectingLine(isLineActiveColor),
             ],
           )
         : Row(
@@ -156,7 +162,7 @@ class FlowStepperWidget extends StatelessWidget {
                 : CrossAxisAlignment.start,
             children: [
               _buildStepContent(context, step),
-              if (showLines && !isLast) _buildConnectingLine(),
+              if (showLines && !isLast) _buildConnectingLine(isLineActiveColor),
             ],
           );
   }
@@ -225,7 +231,7 @@ class FlowStepperWidget extends StatelessWidget {
           );
   }
 
-  Widget _buildConnectingLine() {
+  Widget _buildConnectingLine(bool isLineActiveColor) {
     if (linePainter != null) {
       return CustomPaint(
         painter: linePainter,
@@ -254,11 +260,11 @@ class FlowStepperWidget extends StatelessWidget {
         width: direction == Axis.vertical ? lineThickness ?? 1.0 : spacing,
         height: direction == Axis.vertical ? spacing : lineThickness ?? 1.0,
         decoration: BoxDecoration(
-          color: lineColor ?? inactiveStepColor,
+          color: isLineActiveColor ? lineActiveColor ?? activeStepColor : lineInactiveColor ?? inactiveStepColor,
           border: dashPattern != null
               ? Border(
                   left: BorderSide(
-                    color: lineColor ?? inactiveStepColor,
+                    color: isLineActiveColor ? lineActiveColor ?? activeStepColor : lineInactiveColor ?? inactiveStepColor,
                     width: lineThickness ?? 1.0,
                     style: BorderStyle.solid,
                   ),

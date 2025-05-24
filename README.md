@@ -2,6 +2,13 @@
 
 A lightweight, highly-customizable Flutter stepper/indicator widget with modern design and full styling control.
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Online-blue)](https://flow-stepper-widget.pages.dev/)
+
+## Screenshots
+
+| ![Demo Controls](https://raw.githubusercontent.com/danial2026/flow_stepper_widget/main/assets/demo-controls.png) | ![Demo Stepper](https://raw.githubusercontent.com/danial2026/flow_stepper_widget/main/assets/demo-stepper.png) |
+|------------------------------------|------------------------------------|
+
 ## Features
 
 - Vertical and horizontal layouts with flexible label positioning
