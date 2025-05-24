@@ -1,7 +1,7 @@
 name: flow_stepper_widget_example
 description: Example app for the flow_stepper_widget package
 publish_to: 'none'
-version: 0.0.2
+version: 0.0.3
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

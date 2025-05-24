@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.3
+
+- Added support for active and inactive line colors
+- Improved line color handling with `lineActiveColor` and `lineInactiveColor`
+- Optimized step content layout with better alignment
+- Enhanced step content layout with consistent spacing
+
 ## 0.0.2
 
 - Improved label positioning with `labelType` and `labelOrderType` options
