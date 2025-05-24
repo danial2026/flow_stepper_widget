@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.2
+
+- Improved label positioning with `labelType` and `labelOrderType` options
+- Enhanced accessibility support with semantic labels
+- Fixed line positioning in vertical and horizontal layouts
+
 ## 0.0.1
 
 - Initial release of the Flow Stepper Widget
