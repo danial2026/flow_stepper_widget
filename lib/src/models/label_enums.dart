@@ -1,0 +1,4 @@
+enum LabelType {
+  horizontal,
+  vertical,
+}
