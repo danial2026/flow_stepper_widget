@@ -81,7 +81,7 @@ class FlowStepperWidget extends StatelessWidget {
   final Widget Function(BuildContext, FlowStep)? labelBuilder;
 
   /// Custom builder for step icons
-  final Widget Function(BuildContext, bool, Color, double)? stepIconBuilder;
+  final Widget Function(BuildContext, FlowStep, Color, double)? stepIconBuilder;
 
   /// Custom painter for connecting lines
   final CustomPainter? linePainter;
@@ -189,7 +189,7 @@ class FlowStepperWidget extends StatelessWidget {
             color: effectiveColor,
           ),
           padding: step.padding ?? stepPadding,
-          child: stepIconBuilder?.call(context, step.active, effectiveColor, step.iconSize ?? stepIconSize) ??
+          child: stepIconBuilder?.call(context, step, effectiveColor, step.iconSize ?? stepIconSize) ??
               Icon(
                 step.icon,
                 size: step.iconSize ?? stepIconSize,

@@ -81,7 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-
   Future<void> _launchUrl(String url) async {
     if (!await launchUrl(
       Uri.parse(url),
@@ -112,8 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       'Flow Stepper Widget',
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -431,13 +430,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         stepAnimationDuration: const Duration(milliseconds: 300),
                         onStepTap: _toggleStep,
                         onStepLongPress: _showTooltip,
-                        stepIconBuilder: _useCustomWidget
-                            ? (context, active, color, size) => Icon(
-                                  Icons.edit,
-                                  size: _customWidgetSize,
-                                  color: Colors.white,
-                                )
-                            : null,
+                        stepIconBuilder: _useCustomWidget ? _buildStepIcon : null,
                       ),
                     ),
                   ],
@@ -449,4 +442,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  Widget _buildStepIcon(BuildContext context, FlowStep step, Color color, double size) {
+    int index = demoSteps.indexWhere((step) => step.id == step.id);
+    return Icon(
+      _getStepIcons[index],
+      size: size,
+      color: Colors.white,
+    );
+  }
+
+  final List<IconData> _getStepIcons = [
+    Icons.star,
+    Icons.favorite,
+    Icons.bolt,
+    Icons.cloud,
+    Icons.diamond,
+  ];
 }
