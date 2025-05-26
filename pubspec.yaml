@@ -1,6 +1,6 @@
 name: flow_stepper_widget
 description: A lightweight, highly-customizable Flutter stepper/indicator widget with modern design and full styling control.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/danial2026/flow_stepper_widget
 
 environment:
