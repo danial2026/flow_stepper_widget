@@ -444,7 +444,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildStepIcon(BuildContext context, FlowStep step, Color color, double size) {
-    int index = demoSteps.indexWhere((step) => step.id == step.id);
+    int index = demoSteps.indexWhere((v) => v.id == step.id);
     return Icon(
       _getStepIcons[index],
       size: size,
