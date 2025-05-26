@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.4
+
+- Fixed index calculation in `_buildStepIcon` method for correct step identification
+- Refactored README.md and example app for improved clarity and functionality
+- Refactored FlowStepperWidget layout for improved alignment and spacing
+
 ## 0.0.3
 
 - Added support for active and inactive line colors
