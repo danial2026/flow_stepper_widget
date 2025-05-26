@@ -125,7 +125,13 @@ class FlowStepperWidget extends StatelessWidget {
       textDirection: textDirection,
       child: direction == Axis.vertical
           ? Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: labelType == LabelType.vertical ? MainAxisSize.min : MainAxisSize.max,
+              mainAxisAlignment: labelType == LabelType.vertical
+                  ? MainAxisAlignment.center
+                  : (labelOrderType == LabelOrderType.start ? MainAxisAlignment.end : MainAxisAlignment.start),
+              crossAxisAlignment: labelType == LabelType.vertical
+                  ? CrossAxisAlignment.center
+                  : (labelOrderType == LabelOrderType.start ? CrossAxisAlignment.end : CrossAxisAlignment.start),
               children: List.generate(
                 orderedSteps.length,
                 (index) => buildStep(context, orderedSteps[index], index, orderedSteps.length,
@@ -149,7 +155,10 @@ class FlowStepperWidget extends StatelessWidget {
     return direction == Axis.vertical
         ? Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: labelOrderType == LabelOrderType.start ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: labelType == LabelType.vertical
+                ? CrossAxisAlignment.center
+                : (labelOrderType == LabelOrderType.start ? CrossAxisAlignment.end : CrossAxisAlignment.start),
             children: [
               _buildStepContent(context, step),
               if (showLines && !isLast) _buildConnectingLine(isLineActiveColor),
@@ -245,9 +254,7 @@ class FlowStepperWidget extends StatelessWidget {
     return Padding(
       padding: direction == Axis.vertical
           ? (labelType == LabelType.vertical
-              ? (labelOrderType == LabelOrderType.end
-                  ? EdgeInsets.only(left: getStepPaddingHorizontal)
-                  : EdgeInsets.only(right: getStepPaddingHorizontal))
+              ? (EdgeInsets.all(0))
               : (labelOrderType == LabelOrderType.start
                   ? EdgeInsets.only(right: getStepPaddingHorizontal)
                   : EdgeInsets.only(left: getStepPaddingHorizontal)))
